@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.springcloud.ribbon.eureka.parent</groupId>
+    <artifactId>com-springcloud-ribbon-eureka-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>parent-project</name>
+    <description>Demo many project for one Spring Boot</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>com-springcloud-eureka-register-service</module> <!-- eureka注册中心：提供各个模块注册 -->
+        <module>com-springcloud-ribbon-service-a</module> <!-- 服务器a，提供test-service服务 -->
+        <module>com-springcloud-ribbon-service-b</module> <!-- 服务器b，提供test-service服务 -->
+        <module>com-springcloud-ribbon-service-customer</module> <!-- 负载均衡客户端：服务发现与服务负载均衡 -->
+        <module>com-springcloud-ribbon-service-customer-feign</module><!-- 服务容错降级处理服务 -->
+        <module>com-springcloud-ribbon-zuul</module><!-- API网关服务-->
+    </modules>
+
+
+</project>
