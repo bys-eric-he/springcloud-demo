@@ -23,7 +23,7 @@ public class HelloService {
      * @return
      */
     public String helloFallBack() {
-        return "Error occurred!";
+        return "远端服务不可用,熔断错误回调方法返回结果!";
     }
 
     /**

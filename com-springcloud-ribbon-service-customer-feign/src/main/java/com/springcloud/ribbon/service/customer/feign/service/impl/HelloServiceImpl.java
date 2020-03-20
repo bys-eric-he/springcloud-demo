@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class HelloServiceImpl implements HelloService {
     @Override
     public String hello() {
-        return "请求错误!";
+        return "请求错误!远端服务不可达,熔断错误回调方法返回结果!";
     }
 
     /**
@@ -22,6 +22,6 @@ public class HelloServiceImpl implements HelloService {
      */
     @Override
     public String hello(String name, String password) {
-        return "无可用远端服务, 此结果为本地返回...";
+        return "无可用远端服务, 此结果为本地容错降级返回...";
     }
 }
