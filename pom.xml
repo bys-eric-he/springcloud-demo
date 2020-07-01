@@ -31,7 +31,8 @@
         <module>com-springcloud-ribbon-service-b</module> <!-- 服务器b，提供test-service服务 -->
         <module>com-springcloud-ribbon-service-customer</module> <!-- 负载均衡客户端：服务发现与服务负载均衡 -->
         <module>com-springcloud-ribbon-service-customer-feign</module><!-- 服务容错降级处理服务 -->
-        <module>com-springcloud-ribbon-zuul</module><!-- API网关服务-->
+        <module>com-springcloud-ribbon-zuul</module><!-- ZUUL API网关服务-->
+        <module>com-springcloud-api-gateway</module><!-- API Gateway服务-->
     </modules>
 
 
