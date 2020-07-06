@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Order(value = 3)
 @Component
-public class RouteFilter extends ZuulFilter {
+public class RateLimitFilter extends ZuulFilter {
     // 定义一个令牌桶，每秒产生2个令牌，即每秒最多处理2个请求
     // 这样我们就能将请求数量控制在一秒两个，有没有觉得很酷？
     private static final RateLimiter RATE_LIMITER = RateLimiter.create(2);

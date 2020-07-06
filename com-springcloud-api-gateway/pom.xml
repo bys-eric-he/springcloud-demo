@@ -2,16 +2,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--
+    由于在构建项目的时候会使用Maven pom继承的方式管理复用依赖，很容易有很多冲突的依赖。
+    所以建议使用Spring Cloud Gateway的时候不要使用继承父Maven依赖的方式, 否则会发生以下冲突。
+    Description:
+    Parameter 0 of method modifyRequestBodyGatewayFilterFactory in org.springframework.cloud.gateway.config.GatewayAutoConfiguration required a bean of type 'org.springframework.http.codec.ServerCodecConfigurer' that could not be found.
+
+    Action:
+    Consider defining a bean of type 'org.springframework.http.codec.ServerCodecConfigurer' in your configuration.
+    -->
+    <!--<parent>-->
+    <!--    <groupId>com.springcloud.ribbon.eureka.parent</groupId>-->
+    <!--    <artifactId>com-springcloud-ribbon-eureka-parent</artifactId>-->
+    <!--    <version>1.0-SNAPSHOT</version>-->
+    <!--</parent>-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.springcloud.api.gateway</groupId>
     <artifactId>com-springcloud-api-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>com-springcloud-api-gateway</name>
+
     <description>Spring Cloud API Gateway project for Spring Boot</description>
 
     <properties>
@@ -24,24 +40,36 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--引入spring cloud gateway-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
-
+        <!-- 加入熔断机制依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <!-- Spring Cloud Gateway 已经包含了spring-boot-starter-web 所以在这里不需要再单独引用spring-boot-starter-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.vladimir-bukhtoyarov</groupId>
+            <artifactId>bucket4j-core</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    <!-- 配置Spring Cloud 依赖管理 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
